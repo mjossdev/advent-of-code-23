@@ -1,5 +1,6 @@
 product: jvm/app
 settings:
+  junit: none
   kotlin:
     languageVersion: 2.0
     apiVersion: 2.0

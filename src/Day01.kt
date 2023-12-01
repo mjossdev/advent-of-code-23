@@ -4,6 +4,7 @@ fun main() {
     }
 
     val digitMap = mapOf(
+        *(1..9).map { it.toString() to it }.toTypedArray(),
         "one" to 1,
         "two" to 2,
         "three" to 3,
@@ -15,10 +16,7 @@ fun main() {
         "nine" to 9,
     )
 
-    fun String.tryToDigit(): Int? {
-        this[0].let { if (it.isDigit()) return it.digitToInt() }
-        return digitMap.entries.firstOrNull { startsWith(it.key) }?.value
-    }
+    fun String.tryToDigit(): Int? = digitMap.entries.firstOrNull { startsWith(it.key) }?.value
 
     fun part2(input: List<String>): Int = input.sumOf { line ->
         val windows = line.windowed(digitMap.keys.maxOf { it.length }, partialWindows = true)

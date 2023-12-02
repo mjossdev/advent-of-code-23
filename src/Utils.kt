@@ -21,3 +21,5 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
 fun Any?.println() = println(this)
 
 fun <T, R> List<T>.lastNotNullOf(transform: (T) -> R?): R = asReversed().firstNotNullOf(transform)
+
+fun Iterable<Int>.product() = reduce(Int::times)

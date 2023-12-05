@@ -23,3 +23,20 @@ fun Any?.println() = println(this)
 fun <T, R> List<T>.lastNotNullOf(transform: (T) -> R?): R = asReversed().firstNotNullOf(transform)
 
 fun Iterable<Int>.product() = reduce(Int::times)
+
+fun <T> Iterable<T>.split(predicate: (T) -> Boolean) = buildList<List<T>> {
+    var currentList = mutableListOf<T>()
+    this@split.forEach {
+        if (predicate(it)) {
+            add(currentList)
+            currentList = mutableListOf<T>()
+        } else {
+            currentList.add(it)
+        }
+    }
+    if (currentList.isNotEmpty()) {
+        add(currentList)
+    }
+}
+
+fun LongRange.distance() = last - first

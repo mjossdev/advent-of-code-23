@@ -23,6 +23,7 @@ fun Any?.println() = println(this)
 fun <T, R> List<T>.lastNotNullOf(transform: (T) -> R?): R = asReversed().firstNotNullOf(transform)
 
 fun Iterable<Int>.product() = reduce(Int::times)
+fun Iterable<Long>.product() = reduce(Long::times)
 
 fun <T> Iterable<T>.split(predicate: (T) -> Boolean) = buildList<List<T>> {
     var currentList = mutableListOf<T>()

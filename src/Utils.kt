@@ -40,4 +40,8 @@ fun <T> Iterable<T>.split(predicate: (T) -> Boolean) = buildList<List<T>> {
     }
 }
 
+fun <T> lexicographicalCompare(left: List<T>, right: List<T>, comparator: Comparator<T>): Int =
+    left.zip(right).firstNotNullOfOrNull { (l, r) -> comparator.compare(l, r).takeIf { it != 0 } }
+        ?: (left.size compareTo right.size)
+
 fun LongRange.distance() = last - first

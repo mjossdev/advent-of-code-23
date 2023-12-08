@@ -45,3 +45,26 @@ fun <T> lexicographicalCompare(left: List<T>, right: List<T>, comparator: Compar
         ?: (left.size compareTo right.size)
 
 fun LongRange.distance() = last - first
+
+fun <T> Iterable<T>.repeat(): Sequence<T> = sequence {
+    while (true) {
+        yieldAll(this@repeat)
+    }
+}
+
+fun <T> Iterable<T>.repeatWithIndex(): Sequence<Pair<Int, T>> = sequence {
+    while (true) {
+        this@repeatWithIndex.forEachIndexed { index, item ->
+            yield(index to item)
+        }
+    }
+}
+
+fun Iterable<Long>.lcm(): Long {
+    val largest = max()
+    var candidate = largest
+    while (any { candidate % it != 0L }) {
+        candidate += largest
+    }
+    return candidate
+}

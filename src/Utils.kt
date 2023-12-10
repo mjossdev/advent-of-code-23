@@ -52,10 +52,10 @@ fun <T> Iterable<T>.repeat(): Sequence<T> = sequence {
     }
 }
 
-fun <T> Iterable<T>.repeatWithIndex(): Sequence<Pair<Int, T>> = sequence {
+fun <T> Iterable<T>.repeatWithIndex(): Sequence<IndexedValue<T>> = sequence {
     while (true) {
         this@repeatWithIndex.forEachIndexed { index, item ->
-            yield(index to item)
+            yield(IndexedValue(index, item))
         }
     }
 }

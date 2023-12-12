@@ -68,3 +68,5 @@ fun Iterable<Long>.lcm(): Long {
     }
     return candidate
 }
+
+fun <T> List<T>.tailView() = subList(1, size)

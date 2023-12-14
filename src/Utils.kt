@@ -70,3 +70,8 @@ fun Iterable<Long>.lcm(): Long {
 }
 
 fun <T> List<T>.tailView() = subList(1, size)
+
+fun String.rearrange(order: List<Char>): String {
+    val counts = groupingBy { it }.eachCount().withDefault { 0 }
+    return order.joinToString("") { it.toString().repeat(counts.getValue(it)) }
+}

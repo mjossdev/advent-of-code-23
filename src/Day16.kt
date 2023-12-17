@@ -49,7 +49,7 @@ fun main() {
 
         var currentBeams = next().toSet()
         while (beamHistory.addAll(currentBeams)) {
-            currentBeams = currentBeams.flatMap { it.next() }.toSet()
+            currentBeams = currentBeams.asSequence().flatMap { it.next() }.filter { it !in beamHistory }.toSet()
         }
         return beamHistory.map { it.position }.toSet().size
     }
@@ -69,7 +69,7 @@ fun main() {
                 Beam(Point(rows, it), BeamDirection.UP)
             )
         }
-        return beams.parallelStream().mapToInt { it.energizedTiles(input) }.max().asInt
+        return beams.maxOf { it.energizedTiles(input) }
     }
 
     // test if implementation meets criteria from the description, like:

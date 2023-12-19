@@ -2,6 +2,8 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Reads lines from the given input txt file.
@@ -74,4 +76,12 @@ fun <T> List<T>.tailView() = subList(1, size)
 fun String.rearrange(order: List<Char>): String {
     val counts = groupingBy { it }.eachCount().withDefault { 0 }
     return order.joinToString("") { it.toString().repeat(counts.getValue(it)) }
+}
+
+fun IntRange.intersect(other: IntRange): IntRange = max(first, other.first)..min(last, other.last)
+
+fun IntRange.inverse() = when {
+    first == Int.MIN_VALUE -> last + 1..Int.MAX_VALUE
+    last == Int.MAX_VALUE -> Int.MIN_VALUE..<first
+    else -> throw IllegalArgumentException("Range must start at MIN_VALUE or end at MAX_VALUE")
 }
